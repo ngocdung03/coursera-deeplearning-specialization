@@ -9,3 +9,4 @@
 - When implementing neural network with logistic regression, it is easier to keep b (intercept) and w(s) as separate parameters.
 - Loss function of LR model: L(yhat,y)=-(ylog(yhat) + (1-y)log(1-yhat))  (a *convex* function)
 - Cost function: average of loss.
+asdf d a
