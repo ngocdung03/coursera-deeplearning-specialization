@@ -18,10 +18,21 @@
 - When you are writting codes to implement backpropagation, there will be a final output variable that you really care about or want to optimize.
     - Computing dFinalOutputVar/dvar (eg. dJ/da)
     - When coding, that quantity can just be named 'dvar' rather than 'dFinalOutputVar/dvar'
-- Logistic Regression gradient descent:
+- Logistic Regression gradient descent: [C1_W2.pdf - page 24]
     - da = dL(a,y)/da = -y/a + (1-y)/(1-a)
     - dz = (dL/da).(da/dz) = da.(a(1-a)) = a - y
+        - Explanation: https://community.deeplearning.ai/t/derivation-of-dl-dz/165
     - dw1 = x1dz  => w1 := w1 - αdw1
-    - dw2 = d2dz  => w2 := w2 - αdw2
+    - dw2 = x2dz  => w2 := w2 - αdw2
     - db = dz     => b := b - αdb
-- Gradient descent on m examples 
+- Gradient descent on m examples of algorithm: [C1_W2.pdf - page 27, page 33, page 38]
+    - In this example, 2 for loops are explicitly implemented -> inefficient -> consider *Vectorization*
+- Python and vectorization:
+    - [Python run time of for loop vs vectorization.jpg]
+    - Parallelization instructions - single instruction multiple data (SIMD) instruction
+        - If you use bult-in functions such as *np.function* that don't require you explicityly implementing a for loop, it enables Python numpy to take much better advantag of parallelizm to do your computations much faster.
+- Whenever possible, avoid explicit for-loops.
+- More vectorzation examples: np.exp(), np.log(), np.abs(), np.maximum(), v**2, 1/v
+- Replace one for loop of logistic regression derivatives by vectorization: [C1_W2.pdf - page 33]
+- Replace all the for loops by vectorization - *Broadcasting in Python*: [C1_W2.pdf - page 35]
+    - Backward propagation with vectorization: [C1_W2.pdf - page 38]
