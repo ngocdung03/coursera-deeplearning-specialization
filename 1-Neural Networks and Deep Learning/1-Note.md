@@ -36,3 +36,6 @@
 - Replace one for loop of logistic regression derivatives by vectorization: [C1_W2.pdf - page 33]
 - Replace all the for loops by vectorization - *Broadcasting in Python*: [C1_W2.pdf - page 35]
     - Backward propagation with vectorization: [C1_W2.pdf - page 38]
+- Broadcasting example in Python:
+    - division: percentage = 100*A/(cal.reshape(1,4))
+    - adding by a constant, adding by a duplicated vector, adding by a duplicated transposed vector: [C1_W2.pdf - page 41, page 42]
