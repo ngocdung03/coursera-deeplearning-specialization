@@ -39,3 +39,7 @@
 - Broadcasting example in Python:
     - division: percentage = 100*A/(cal.reshape(1,4))
     - adding by a constant, adding by a duplicated vector, adding by a duplicated transposed vector: [C1_W2.pdf - page 41, page 42]
+- Tips and tricks to avoid bugs related to broadcasting in Python: 
+    + Not using rank 1 array (eg: a = np.random.randn(5,)). Instead, defining a matrix/eg. a column vector: a = np.random.randn(5,1) 
+        - Or make sure its shape by assert(a.shape==(5,1)) OR a = a.reshape((5,1))
+- Logistic regression cost function
