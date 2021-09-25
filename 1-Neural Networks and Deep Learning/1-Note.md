@@ -42,4 +42,16 @@
 - Tips and tricks to avoid bugs related to broadcasting in Python: 
     + Not using rank 1 array (eg: a = np.random.randn(5,)). Instead, defining a matrix/eg. a column vector: a = np.random.randn(5,1) 
         - Or make sure its shape by assert(a.shape==(5,1)) OR a = a.reshape((5,1))
-- Logistic regression cost function
+- Logistic regression cost function:
+    - Explain lost function [C1_W2.pdf - page 45]
+### Overview
+- Notation: x(i) for individual observation, x[i] for the order of input layer, a1^[1] node 1 in layer 1.
+- Hidden layer: in the training set, the true value for the nodes in the middle are not observed.
+    - A network with 1 hidden layer: 2-layer NN (iput layer doesnt count)
+- Activation function: 
+    - When you have centralized data, may apply tanh instead of sigmoid function. Furthermore, tanh is more superior than sigmoid.
+    - For output layer, may apply sigmoid because it is more meaningful when y take value 0, 1.
+    - Downside of sigmoid and tanh is when z is very large/small, the gradient descent will be very slow -> may consider ReLU (a = max(0,z))- default, most common choice for activation function.
+    - One variation of ReLU: Leaky ReLU (a = max(0.01,z)).
+    - If you use linear activation function, no matter how many layer, all the network is doing is just computing a linear activation function without hidden layers.
+        - If the problem is linear regression  (eg. predicting temperatures), the output layer can have linear activation function.
