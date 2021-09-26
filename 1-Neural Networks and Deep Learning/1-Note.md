@@ -55,3 +55,8 @@
     - One variation of ReLU: Leaky ReLU (a = max(0.01,z)).
     - If you use linear activation function, no matter how many layer, all the network is doing is just computing a linear activation function without hidden layers.
         - If the problem is linear regression  (eg. predicting temperatures), the output layer can have linear activation function.
+- Derivative of sigmoid function: a(1-a)
+- Derivative of tanh function: 1-(tanh(z))^2
+- Derivative of ReLU function: 0 with z<0, 1 with z>0 -> sub-gradient of the activation function g of z
+- Derivative of leaky ReLU function: 0.01 with z<0, 1 with z>0 
+### New chapter
