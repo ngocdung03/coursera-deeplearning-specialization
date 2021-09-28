@@ -59,3 +59,4 @@
 - Derivative of tanh function: 1-(tanh(z))^2
 - Derivative of ReLU function: 0 with z<0, 1 with z>0 -> sub-gradient of the activation function g of z
 - Derivative of leaky ReLU function: 0.01 with z<0, 1 with z>0 
+- Backpropagation intuition: derivatives and chain rule [C1_W3.pdf - page 30]
