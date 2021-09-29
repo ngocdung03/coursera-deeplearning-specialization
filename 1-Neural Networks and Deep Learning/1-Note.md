@@ -60,3 +60,6 @@
 - Derivative of ReLU function: 0 with z<0, 1 with z>0 -> sub-gradient of the activation function g of z
 - Derivative of leaky ReLU function: 0.01 with z<0, 1 with z>0 
 - Backpropagation intuition: derivatives and chain rule [C1_W3.pdf - page 30]
+- Random initialization: if choosing all the initial weights as zero, the activate functions will be the same.
+    - Instead, initialize them randomly: w[1] = np.random.randn((2,2))*0.01 (multiply by a small number so that z will not fall to the tail of sigmoid function)
+    - b doesn't have the symmetry breaking problem: b[1] = np.zeros((2,1))
