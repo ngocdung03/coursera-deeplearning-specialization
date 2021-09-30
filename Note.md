@@ -90,3 +90,17 @@
     - Parameters: Ws, bs
     - Hyperparameters: alpha, iterations, hidden layers, choice of activation function...
     - Rule of thumb: Regularly double check the better value for the hyperparameter
+
+## Improving Deep Neural Networks: Hyperparameter Tuning, Regularization and Optimization
+### Practical aspects of deep learning
+- Development set: =hold-out cross validation set
+- In the past when data has n=100 to 10000, dev and test set accounts 30-40% sample.
+- When the data is much larger, dev and test set are not necessarily big. (maybe 2%)
+- Problems: mismatched train/test distribution -> make sure they come from the same distribution. 
+- Not having a test set might be okay
+- Signs when modal is underfitting (high biased): high error on training set, error on test set is not much higher than training set.
+- Optimal error/Bayes error: used to justify model error is high or not.
+- Basic recipe for Machine Learning:
+    - 1) High bias (training data performance) -> Bigger network/Train longer/ Neural network architechture search.
+    - 2) High variance (dev set performance) -> More data/ Regularization/ Neural network architechture search.
+- In the modern, big data world: improving bias doesn't hurt variance and vice versa. Esp true for neural network
