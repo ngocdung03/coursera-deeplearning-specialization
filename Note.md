@@ -104,3 +104,47 @@
     - 1) High bias (training data performance) -> Bigger network/Train longer/ Neural network architechture search.
     - 2) High variance (dev set performance) -> More data/ Regularization/ Neural network architechture search.
 - In the modern, big data world: improving bias doesn't hurt variance and vice versa. Esp true for neural network
+- Regularization:
+    - Why do we regularize just w but not b?: w has a lot of parameters, so you aren't fitting all the parameters well whereas b is just a single number.
+    - L2 regularization is more common than L1. L1 makes model sparse
+    - In the class, lambd was used to not clash with the reserved key in Python
+    - L2 repective to neural network: Frobenius norm
+    - L2~weight decay
+    - Frobenius norm: if set lamba large, some w are nearly zeroed out -> simplify neural network.
+- Dropout regularization: assign probability of being eliminated and drop some nodes
+    - Implementing dropout ('Inverted dropout'): no matter what you set the threshold (keep.prob) to, this technique ensures the expected value of a[l] remains the same. This makes test time easier because you have less of a scaling problem -> Most common dropout.
+- Making predictions at test time: 
+    - Not use dropout explicitly, you don't really want your output to be random, it will add noise to your predictions
+- Dropout intuition: each node can't rely on any one feature in the previous layer, so have to spread out weights -> tend to shrink weights.
+    - Dropout can formally be shown to be an adaptive form of L2 regularization
+    - It is alright to vary keep.prob in each layer:
+        - Eg. in [C2_W1 page 23], layer 2 have the largest matrix of weight (7x7). To prevent overfitting in this layer, set keep.prob low.
+        - Can apply dropout to input layer but not being done offen on practice.
+    - Commonly applied for computer vision: the input sizes so big in putting all these pixels that you almost never have enough data. Less frequent in some other areas.
+    - Downside: lost function J is no longer well defined on every iteration. 
+        - Solution: Graphing J before dropout (turn off it or set keep.prob=1). Then finally applying dropout
+- Machine learning comprise:
+    - Optimize cosf function J: gradient descent...
+    - Not overfit: regularization, get more data ...
+-> Orthorganization: think about one task at a time
+- Other regularizations: 
+    - Data augmentation: reducing the cost of getting new data and overfitting.
+    - Early stopping: advantage: don't need to try a log of values of hyperparameters. One downside is not ensuring orthorganization (2 components of machine learning are not independent)
+- Normalizing inputs: to speed up training even with small learning rate. Note: use mean and sigma from train set to normalize test set -> ensure both the sets go through the same transformation.
+    - Step 1: zero out to the mean
+    - Step 2: normalize the variances
+- Vanishing/exploding gradients: huge barrier to train deep network
+    - If W[l] > Identity matrix, the activations will increase exponentially (explode) and vice versa.
+    - Partial solution: carefully choose the initial weights
+- Weight initialization: 
+    - The larger n (number of input features that go into a neuron), the smaller ws (weights) you want they to be. One way is to set Var(w:)=1/n
+        - In practice: w[l] = np.random.randn(shape)*np.sqrt(1/n[l-1])
+        - For ReLU, 2/n is better than 1/n
+        - In deep-L network, considering n[l-1] instead of n
+        - If the input features and activations are roughly mean 0 and standard variance 1, the resulted z tends to take on a similar scale. 
+        - This helps reduce the vanishing, exploding
+        - For tanh, may use sqrt(1/n) rather 1/n (Xavier initialization)
+- Numerical approximation of gradients
+    - Two-sided difference (more accurate than one-sided difference): g(theta) ~ (f(theta+epsilon)-f(theta-epsilon))/2epsilon  with error O(epsilon^2)
+    - Whereas one-sided difference (f(theta+epsilon)-f(epsilon))/epsilon  with error O(epsilon) -> less accurate
+- Gradient checking: 
