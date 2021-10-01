@@ -147,4 +147,20 @@
 - Numerical approximation of gradients
     - Two-sided difference (more accurate than one-sided difference): g(theta) ~ (f(theta+epsilon)-f(theta-epsilon))/2epsilon  with error O(epsilon^2)
     - Whereas one-sided difference (f(theta+epsilon)-f(epsilon))/epsilon  with error O(epsilon) -> less accurate
-- Gradient checking: 
+- Gradient checking: find bugs
+    - Take all w[l], b[l] and reshape into a big vector 'theta'
+    - Take all dw[l], db[l] and reshape into a big vector 'dtheta'
+    - Check if dtheta is the gradient of J(theta);
+        - for each i: check if dtheta.i_approx = (J(theta.1, theta.2,...,theta.i+epsilon,...) - J(theta.1, theta.2, theta.i-epsilon,...))/2epsilon ~ dtheta.i = dJ/dtheta.i
+        - If the difference is 10^-7 -> great, 10^-3 -> worry
+- Note on gradient checking:
+    - Don't use in training - only to debug
+    - If algorithm fails grad check, look at components to try to identify bugs. (look in both db[l] and dw[l])
+    - Remember regularization so that dtheta = gradient of J Including the used regularization term.
+    - Doesn't work with dropout: can grad check without dropout (keep.prob=1)
+    - In some rare situation, implementation of gradient descent is correct when w and b are close to 0: Run at random initialization; perhaps again after some training
+
+### Optimization algorithms
+- Mini-batch gradient descent: x{t} : (nx, m/k), y{t} : (1, m/k)
+- One epoch of training: epoch means a single pass through the training set.
+- With mini-batch gradient descent, an epoch allows you to take 5000 gradient descent steps.
