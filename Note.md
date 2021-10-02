@@ -226,4 +226,44 @@
     - Coarse to find scheme: look for the region where the sets of hyperparameters work best then 'zoom in'.
 - Appropriate scale for hyperparameters:
     - alpha: log scale instead of linear scale
-        - In Python: r = -4*np.random.randn() <- 
+        - In Python: r = -4*np.random.randn() -> alpha = 10^r
+    - beta: log scale of (1-beta)^r with from -1 to -3.
+- Practice
+    - !Intuitions do get stale. Re-evaluated occasionally.
+    - Babysitting one model: when don't have enough computer resource (Panda approach)
+    - Training many models in parallel (Caviar approach) 
+- Please note, as pointed out earlier in Week 1, the normalization should be: X=X/σ 
+- Normalizing activations in a network: 
+    - Normalizing inputs to speed up learning: (X-mu)/σ 
+    - In practice, normalizing z is more often than a
+    - Can add epsilon at the denominator of the function of z_norm
+    - We don't want the hidden units to always have mean 0 and variance 1:
+        - z_tilde = gamma*z(i)_norm + beta   (this beta differs from gradient momentum)
+        - gamma and beta are learnable parameters of the model
+        - Revert normalization: gamma = sqrt(sigma^2 + epsilon); beta = mu
+        - Batch normalization can apply normalization to not only the input layer but also hidden layers
+- Fitting batch norm into a neural network
+    - Batch norm is applies in multi layers
+    - beta[l]:= beta[l] - alpha.dbeta[l], same as gamma
+    - Working with mini-batches
+    - b[l] will be canceled out
+- Why does batch norm work?
+    - Similar to normalizing input, but also for hidden units
+    - *Covariance shift*: x -> y. If distribution of x changes, need to retrain the model.
+    - Weights of deeper in the network more robust to changes of weights of earlier layers. It ensures no matter how the change, the mean and variance of z(s) will remain the same 
+        - It allows each layer of the network to learn by itself, a little bit more independently of other layers. -> speed up the learning
+    - Slight regularization effect
+        - Each mini-batch is scaled by the mean/variance computed on just that mini-batch
+        - This adds some noise to the values z[l] -> similar to dropout, it adds some noise to each hidden layer's activations.
+    - If you use the big mini-batch size, eg 512, you are reducing this noise and so the regularization effect -> wouldn't really use batch norm as a regularizer
+- Batch norm at test time
+    - Get Mu and sigma from exponentially weighted average on train set where the average is across the mini batches -> sometimes called the running average
+    - Calculate z_norm in test set by the resulted Mu and sigma above
+    - Z tilde using beta and gamma from training process
+- Softmax regression:
+    - Outcome have multiple classes C>2
+    - yhat is (C,1)
+    - Activation function:
+        - temporary variable (normalizing?): t = e^z[L]  (element-wise; z[L] and t : (C,1))
+        - a[L] = e^z[L]/(sum of t from i to C)   (a: (C,1)) -> the chance of each class
+    - Before, function like sigmoid take a real number and output a real number. The unusual thing of Softmax is it take a vector and outout a vector
