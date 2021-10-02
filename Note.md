@@ -162,5 +162,68 @@
 
 ### Optimization algorithms
 - Mini-batch gradient descent: x{t} : (nx, m/k), y{t} : (1, m/k)
+    - Make progress without to wait the process of entire training set.
 - One epoch of training: epoch means a single pass through the training set.
 - With mini-batch gradient descent, an epoch allows you to take 5000 gradient descent steps.
+- Setting mini-batch size =m: batch gradient descent
+- Mini-batch size =1: Stochastic gradient descent, can be too noisy
+- For small training set <2000: batch gradient descent
+- Otherwise typical mini-batch size 64->512: sometimes your code runs faster if mini-batch size is a power of 2.
+    - Make sure mini-batch fit in CPU/GPU
+- Exponentially weighted averages:
+    - Given V_t = beta.V_t-1 + (1 + beta).theta_t
+    - V_t as approximated average over 1/(1-beta) days' temperature
+    - If V_t is larger, the curve is smoother and shifted to the right
+    - Exponetially decaying function: add up to 1, bias correction
+    - (1-epsilon)^(1/epsilon) = 1/e  -> 1/epsilon will be the number of days
+    - When beta=0.9, you're computing an exponentially weighted average that focuses on just the last 10 days temperature.
+    - Advantage: take little memory
+    - Bias correction: 
+        - When beta is high, the curve starts off really low 
+        - Instead of estimating V_t, calculate V_t/(1-beta^t)
+- Gradient descent with momentum: works faster than standard gradient descent.
+    - V is exponentially weighted average
+    - V_dw = beta.V_dw + (1-beta).dw
+    - V_db = beta.V_db + (1-beta).db
+    - With exponentially weighted average, steps of gradient descent are smoothed out - average values closer to 0
+    - Think of dw, db as acceleration, V as velocity and beta as friction when a ball roll down the bowl. The ball gains momentum.
+    - 2 hyperparameters: alpha, beta (commonly 0.9)
+- RMSprop: root mean square prop - speed up gradient descent
+    - Slowdown learning in b direction and speed up learning in w direction
+    - S_dw = beta.S_dw + (1-beta).dw^2
+    - S_db = beta.S_db + (1-beta).db^2
+    - w := w - alpha.dw/sqrt(S_dw)
+    - b := b - alpha.db/sqrt(S_db)
+    - We want dw is small and db is big
+    - When the steps are dampended out, you can choose larger alpha and get faster learning
+    - In practice, the directions where you are trying the dampen can be w2, w3, w5...
+    - In practice, add small epsilon to sqrt(S_dw) and sqrt(S_db) in the denominator to avoid they are too close to 0.
+- Adam optimization algorithm: putting gradient descent with momentum and RMSprop together.
+    - Adaptive moment estimation
+    - Very effective for many different networks of a very wide variety of architectures.
+    - Implementing bias correction
+    - w := w - alpha.V_dw_corrected/(sqrt(S_dw_corrected)+epsilon)
+    - b := b - alpha.V_db_corrected/(sqrt(S_db_corrected)+epsilon)
+    - hyperparameters: alpha - needs to be tuned, beta1 - 0.9, beta2 - 0.999, epsilon - 10^-8 (no need to be tuned)
+- Learning rate decay:
+    - May help speed up learning algorithm
+    - alpha = alpha_0/(1+decay_rate*epoch_num)
+    - Other methods: 
+        - Exponetinal decay where alpha <1: alpha=alpha_0*0.95^epoch_num
+        - alpha0*k/sqrt(epoch_num)
+        - Discrete staircase
+        - Manual decay: work only on a small number of models
+- The problem of local optima:
+    - In high dimensional space, you are likely to run into the saddle point -> get stuck in a bad local optima
+    - Plateaus: the region that learning is slowed down for a long time
+    - Should apply speeding up methods mentioned above.
+- Tuning hyperparameters: by importance suggested by Adam:
+    - alpha
+    - beta, #hidden units, #mini-batch size
+    - #layers, learning rate decay
+    - default for beta1, beta2, epsilon
+    - Don't use a grid. Instead, using random sets of hyperparameters
+    - Coarse to find scheme: look for the region where the sets of hyperparameters work best then 'zoom in'.
+- Appropriate scale for hyperparameters:
+    - alpha: log scale instead of linear scale
+        - In Python: r = -4*np.random.randn() <- 
