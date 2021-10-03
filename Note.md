@@ -267,3 +267,67 @@
         - temporary variable (normalizing?): t = e^z[L]  (element-wise; z[L] and t : (C,1))
         - a[L] = e^z[L]/(sum of t from i to C)   (a: (C,1)) -> the chance of each class
     - Before, function like sigmoid take a real number and output a real number. The unusual thing of Softmax is it take a vector and outout a vector
+- Choosing deep learning frameworks
+    - Ease of programming (development and deployment)
+    - Running speed
+    - Truly open (open source with good governance)
+- TensorFlow:
+    - Only have to implement forward propagration: using GradientTape
+```py
+import numpy as np
+import tensorflow as tf
+
+w = tf.Variable(0, dtype=tf.float32)
+x = np.array((1.0, -10.0, 25.0), dtype=np.float32)
+optimizer = tf.keras.optimizers.Adam(0.1)
+
+def training(x, w, optimizer):
+    def cost_fn():
+        return x[0]*w**2 + x[1]*w + x[2]
+    for i in range(1000):
+        optimizer.minimize(cost_fn, [w])
+    return w
+w = training(x, w, optimizer)
+```
+## Structured Machine Learning projects
+### Introduction to ML Strategy
+- To improve accuracy:
+    - Collect more data
+    - Collect more diverse training set
+    - Train algorithm longer with gradient descent
+    - Try Adam instead of gradient descent
+    - Try bigger network 
+    - Try smaller network
+    - Try dropout
+    - Add L2 regularization
+    - Change network architechture
+        - Activation functions
+        - Number of hidden units
+        ...
+- Orthogonalization
+    - Orthogonal means at 90 degrees to each other -> hyperparameters are independent. It is more ideal and to have control over independent hyperparameter.
+    - For a supervised learning system to do well, make sure:
+        - Fit training set well on cost function ~ human-level performance: bigger network, Adam...
+        - Fit dev set well on cost function: Regularization, bigger train set
+        - Fit test set well: Bigger dev set
+        - Performs well in real world: Change dev set or cost function
+- Single Number evaluation metric: sometimes called single row number
+    - F1 score: combining Precision and Recall - "harmonic mean"
+    - Speed up iteration
+- Satisficing and Optimizing metric:
+    - Combine accuracy and running time into one metric
+    - Optimizing metric - you want to maximize it: eg accuracy
+    - Staisficing metric - you want it to be good enough: eg. running time <=100ms, false positive every 24 hour
+- Train/dev/test distributions
+    - Set up dev set + one single metric
+    - Ensuring the sets come from the same distribution: 
+        - Randomly shuffle into the sets: dev/test set
+    - Choose a dev set and test set to reflect data you expect to get in the future and consider important to do well on.
+- Dev/test sets' sizes:
+    - In the modern world, with large data (~1mil): train set 98% instead of the rule of thumb 70-30 or 60-20-20.
+    - The goal is to set the test set to be big enough to give high confidence in the overall performance of your system: 10k or 100k may be enough.
+    - Sometimes it's oka to not have test set, when the dev set is very large so that you think you won't overfit the dev set too badly.
+- When to change dev/test sets and metrics?
+    - Eg. when an algorithm is doing better on the evaluation metric but also a worse one considering other aspect (wrong picture...) -> the evaluation metric is no longer correctly rank order preferences between algorithms.
+
+### ML Strategy 2
