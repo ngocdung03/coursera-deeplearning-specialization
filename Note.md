@@ -330,4 +330,6 @@ w = training(x, w, optimizer)
 - When to change dev/test sets and metrics?
     - Eg. when an algorithm is doing better on the evaluation metric but also a worse one considering other aspect (wrong picture...) -> the evaluation metric is no longer correctly rank order preferences between algorithms.
 
+- Dev/test sets' sizes:
+    - In the modern world, with large data (~1mil): train set 98% instead of the rule of thumb 70-30 or 60-20-20.
 ### ML Strategy 2
