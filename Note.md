@@ -329,7 +329,18 @@ w = training(x, w, optimizer)
     - Sometimes it's oka to not have test set, when the dev set is very large so that you think you won't overfit the dev set too badly.
 - When to change dev/test sets and metrics?
     - Eg. when an algorithm is doing better on the evaluation metric but also a worse one considering other aspect (wrong picture...) -> the evaluation metric is no longer correctly rank order preferences between algorithms.
-
-- Dev/test sets' sizes:
-    - In the modern world, with large data (~1mil): train set 98% instead of the rule of thumb 70-30 or 60-20-20.
-### ML Strategy 2
+    - Change evaluation metric: eg put more error weight on porn pic in image classification
+        - Step 1 - Place target: what do you want the metric to do
+        - Step 2 - Aim/shoot at target: Tune, put additional weight at the error/cost function...
+    - If doing well on metric + dev/test set does not correspond to doing well on your application, change your metric and/pr dev/test set.
+- Why human-level performance?
+    - Bayes optimal error: best possible error 
+    - Accuracy increase often slows down after surpassing human-level performance (hlp)
+        - One reason is hlp is not far from Bayes optimal error
+        - If performance is under hlp, there are tools to easily improve it.
+    - In tasks humans are good at (or better than ML):
+        - Get labeled data from humans.
+        - Gain insight from manual error analyssi: why did a person get this right?
+        - Better analysis of bias/variance
+- Avoidable bias:
+    - For some situations, think of hlp as a proxy for Bayes error.
