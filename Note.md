@@ -344,3 +344,23 @@ w = training(x, w, optimizer)
         - Better analysis of bias/variance
 - Avoidable bias:
     - For some situations, think of hlp as a proxy for Bayes error.
+    - Eg:
+        - If hlp 1%, training error 8%, dev error 10% -> reduce bias
+        - If hlp 7.5%, training error 8%, dev error 10% -> reduce variance
+    - Avoidable bias: the distance between training error and hlp
+    - Your can't actually do better than Bayes error unless you're overfitting.
+- Understanding human-level performance:
+    - Be clear of the objective to define hlp
+    - Different definition of hlp can lead to different values -> may change tactic for reducing avoidable bias or variance, esp when you're doing really well on the algorithm.
+- Surpass hlp:
+    - Problems where ML significantly surpasses hlp:
+        - Online advertising, product recommendations, logistics (predicting transit time), loan approvals -> huge amount of structured data, not natural perception problems.
+        - Even speech recognition,, some image recognition tasks...
+- Improving model performance:
+    - Assumptions of supervised learning:
+        1. Fit the training set pretty well: low avoidable bias
+        2. Generalizes pretty well to the dev/test set: variance
+    - Reducing bias and variance: choosing tactic as mentioned about
+        - Reducing bias: bigger model, longer/better optimizaiton algo, NN architechture/hyperparameter search.
+        - Reducing variance: more data, regularization, NN architechture/hyperparameter search.
+sdfds
