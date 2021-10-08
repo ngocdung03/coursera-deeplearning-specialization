@@ -363,3 +363,4 @@ w = training(x, w, optimizer)
     - Reducing bias and variance: choosing tactic as mentioned about
         - Reducing bias: bigger model, longer/better optimizaiton algo, NN architechture/hyperparameter search.
         - Reducing variance: more data, regularization, NN architechture/hyperparameter search.
+- Research for architechture
