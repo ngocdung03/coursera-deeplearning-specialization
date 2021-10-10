@@ -364,4 +364,8 @@ w = training(x, w, optimizer)
         - Reducing bias: bigger model, longer/better optimizaiton algo, NN architechture/hyperparameter search.
         - Reducing variance: more data, regularization, NN architechture/hyperparameter search.
 - Error analysis
-    - Eg: cat classifier mistakes dog for cat: Get ~100 mislabeled dev set examples and Count up how many are dogs. 
+    - Eg: To decide for a cat classifier if we should improve it so that it will not mistake dog: Get ~100 mislabeled dev set examples and Count up how many are dogs. 
+    - Upper bound on how much you could improve performance by working on the dog problem -> ceiling on performance
+    - Evaluate multiple ideas in parallel: eg. pictures of dogs, great cats, blurry images
+    - Recode in spreadsheet: [C3W2 pg 4]
+-
