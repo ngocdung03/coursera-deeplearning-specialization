@@ -317,7 +317,7 @@ w = training(x, w, optimizer)
 - Satisficing and Optimizing metric:
     - Combine accuracy and running time into one metric
     - Optimizing metric - you want to maximize it: eg accuracy
-    - Staisficing metric - you want it to be good enough: eg. running time <=100ms, false positive every 24 hour
+    - Satisficing metric - you want it to be good enough: eg. running time <=100ms, false positive every 24 hour
 - Train/dev/test distributions
     - Set up dev set + one single metric
     - Ensuring the sets come from the same distribution: 
@@ -368,4 +368,4 @@ w = training(x, w, optimizer)
     - Upper bound on how much you could improve performance by working on the dog problem -> ceiling on performance
     - Evaluate multiple ideas in parallel: eg. pictures of dogs, great cats, blurry images
     - Recode in spreadsheet: [C3W2 pg 4]
--
+- Note: doing and checking tests
