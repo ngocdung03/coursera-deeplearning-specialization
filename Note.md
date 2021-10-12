@@ -368,4 +368,22 @@ w = training(x, w, optimizer)
     - Upper bound on how much you could improve performance by working on the dog problem -> ceiling on performance
     - Evaluate multiple ideas in parallel: eg. pictures of dogs, great cats, blurry images
     - Recode in spreadsheet: [C3W2 pg 4]
-- Note: doing and checking tests
+- Cleaning up incorrectly labeled data
+    - Deep learning algorithms are quite robust to random errors in the training set: so long those erros are not too far from random
+    - If those incorrectnesses in dev/test set: during error analysis, add one column for counting up when label Y was incorrect -> find examples where the classifier disagrees with the label in the dev set.
+    - If the errors makes a significant difference (considering the fraction of errors due to incorrect labels/Overall dev set error) to the ability to evaluate algorithms on your dev set -> go ahead and spend time to fix incorrect labels.
+    - Remember the goal of dev set is to help you select between two classifiers A and B: if this selection is affected by incorrect labeling, go fix the problem.
+    - Correcting incorrect dev/test set examples: 
+        - Apply same process to your dev and test sets to makes sure they continue to come from the same distribution.
+        - Consider examining exa ples your algorithm got right as well as ones it got wrong -> not easy to do
+        - Tran and dev/test data may now come from slightly different distribution (in case dev/test set are corrected by train set isn't).
+- Build your first system quickly, then iterate: 
+    - Set up dev/test set and metric
+    - Build initial system quickly: find the train set, train it and see
+    - Bias/Variance analysis and Error analysis to prioritize next steps.
+    - This advice applies less strongly if you are working on an application area in which you have significant prior experience, or there is a siginificant body of academic literature having pretty much the exact same problem you are building. 
+- Training and testing on different distributions: 
+    - In case you need many data that not only come from the distribution you are concerning
+    - Option 1: combine the sources of data, shuffle then dividing train/dev/test set -> against this because dev set doesn't reflect the distribution you concern
+    - Option 2: divide the sets so that dev and test set include only the distribution you concern -> aiming at the target
+-  Bias and Variance with Mismatched data distributions
