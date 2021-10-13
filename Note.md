@@ -387,3 +387,11 @@ w = training(x, w, optimizer)
     - Option 1: combine the sources of data, shuffle then dividing train/dev/test set -> against this because dev set doesn't reflect the distribution you concern
     - Option 2: divide the sets so that dev and test set include only the distribution you concern -> aiming at the target
 -  Bias and Variance with Mismatched data distributions
+    - Making training-dev set: further split train set into this set. This set isn't used for training model, but for estimating the true error due to variance problem. Otherwise is data mismatch problem
+    - General principles: to detect bias/varirance/or data mismatch problem
+    1. Human level
+    2. Training set error
+    3. Train-dev set error
+    4. Dev set error
+    5. (Maybe) Test set error: the degree if overfitting to the dev set
+    - More general formulation: [C3_W2.pdf pg 17]
