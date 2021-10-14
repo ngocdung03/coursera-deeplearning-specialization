@@ -395,3 +395,15 @@ w = training(x, w, optimizer)
     4. Dev set error
     5. (Maybe) Test set error: the degree if overfitting to the dev set
     - More general formulation: [C3_W2.pdf pg 17]
+- Multi-task learning (MTL)
+    - Unline softmax: each intance can have multiple label.
+    - If some of the earlier features in neural network can be shared between the different types of objects (labels), training One neural network to do multiple things results in better performance than training completely separate networks to do each task.
+    - MTL also works even if labels are not fully recorded in one instance sometimes (missing): just sum up only value of 1 and 0.
+    - When MTL makes sense:
+        - Training on a set of tasks that could benefit from having shared lower-level features.
+        - Usually: amount of data you have for each task is quite similar.
+        - Can train a big enough neural network to do well on all the tasks
+- End-to-end learning:
+    - With small datasets, the traditional pipelines work better and vice versa
+    - With medium datasets, may consider bypassing some steps
+    - If you don't have enough data, breaking the problem down to sub-problems may results in better performance than a pure end-to-end deep learning approach.
