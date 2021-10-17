@@ -407,4 +407,4 @@ w = training(x, w, optimizer)
     - With small datasets, the traditional pipelines work better and vice versa
     - With medium datasets, may consider bypassing some steps
     - If you don't have enough data, breaking the problem down to sub-problems may results in better performance than a pure end-to-end deep learning approach.
-- When to use end-to-end faefd
+- When to use end-to-end 
