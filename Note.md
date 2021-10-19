@@ -408,4 +408,3 @@ w = training(x, w, optimizer)
     - With medium datasets, may consider bypassing some steps
     - If you don't have enough data, breaking the problem down to sub-problems may results in better performance than a pure end-to-end deep learning approach.
 - When to use end-to-end:
-+ Based on experience
