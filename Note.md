@@ -408,3 +408,11 @@ w = training(x, w, optimizer)
     - With medium datasets, may consider bypassing some steps
     - If you don't have enough data, breaking the problem down to sub-problems may results in better performance than a pure end-to-end deep learning approach.
 - When to use end-to-end:
+    - Pros:
+        - Let the data speak (rather than being forced to reflect human preconceptions)
+        - Less hand-designing of components needed
+    - Cons:
+        - May need large amount of data 
+        - Excludeds potentially useful hand-designed components
+    - To apply:
+        - Key question: Do you ohave sufficient data to learn a function of the complexity needed to map x to y?
