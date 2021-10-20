@@ -388,13 +388,19 @@ w = training(x, w, optimizer)
     - Option 2: divide the sets so that dev and test set include only the distribution you concern -> aiming at the target
 -  Bias and Variance with Mismatched data distributions
     - Making training-dev set: further split train set into this set. This set isn't used for training model, but for estimating the true error due to variance problem. Otherwise is data mismatch problem
-    - General principles: to detect bias/varirance/or data mismatch problem
+    - General principles: to detect bias/variance/or data mismatch problem
     1. Human level
     2. Training set error
     3. Train-dev set error
     4. Dev set error
-    5. (Maybe) Test set error: the degree if overfitting to the dev set
+    5. (Maybe) Test set error: the degree if overfitting to the dev set -> may be bigger dev set
     - More general formulation: [C3_W2.pdf pg 17]
+- Addressing data mismatch:
+    - Carry out manual error analysis to try to understand difference between training and dev/test sets
+        - Eg if dev set is overfitted, may look out the different bwt dev and test set
+    - Make training data more similar; or collect more data similar to dev/test sets
+        - Eg: if dev set have many car noise -> simulate noisy in training data
+        - Artificial data synthesis
 - Multi-task learning (MTL)
     - Unline softmax: each intance can have multiple label.
     - If some of the earlier features in neural network can be shared between the different types of objects (labels), training One neural network to do multiple things results in better performance than training completely separate networks to do each task.
@@ -416,3 +422,5 @@ w = training(x, w, optimizer)
         - Excludeds potentially useful hand-designed components
     - To apply:
         - Key question: Do you ohave sufficient data to learn a function of the complexity needed to map x to y?
+        - Sometimes, use deep learning to learn individual components rather than the whole process
+        - Carefully choose mapping X -> Y depends what tasks you can get data.
