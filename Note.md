@@ -375,8 +375,9 @@ w = training(x, w, optimizer)
     - Remember the goal of dev set is to help you select between two classifiers A and B: if this selection is affected by incorrect labeling, go fix the problem.
     - Correcting incorrect dev/test set examples: 
         - Apply same process to your dev and test sets to makes sure they continue to come from the same distribution.
-        - Consider examining exa ples your algorithm got right as well as ones it got wrong -> not easy to do
+        - Consider examining examples your algorithm got right as well as ones it got wrong -> not easy to do
         - Tran and dev/test data may now come from slightly different distribution (in case dev/test set are corrected by train set isn't).
+### Week 2
 - Build your first system quickly, then iterate: 
     - Set up dev/test set and metric
     - Build initial system quickly: find the train set, train it and see
@@ -400,7 +401,15 @@ w = training(x, w, optimizer)
         - Eg if dev set is overfitted, may look out the different bwt dev and test set
     - Make training data more similar; or collect more data similar to dev/test sets
         - Eg: if dev set have many car noise -> simulate noisy in training data
-        - Artificial data synthesis
+        - Artificial data synthesis: eg: sound record + car noise = synthesized in-car audio
+            - Potential to be overfitted
+- Transfer Learning:
+    - Transfer knowledge to different task: delete the last output layer in the network, create a new set of randomly initialized weights just for the last layer
+    - Rule of thumb: with small dataset, just retrain one-two last layer. With large data, maybe all layers (pre-training and fine-tuning)
+    - When it makes sense:
+        - Lot of data from the source, less data in the target problem
+        - Task A and B have the same input x
+        - Low level features from A could be helpful for learning B
 - Multi-task learning (MTL)
     - Unline softmax: each intance can have multiple label.
     - If some of the earlier features in neural network can be shared between the different types of objects (labels), training One neural network to do multiple things results in better performance than training completely separate networks to do each task.
@@ -424,3 +433,24 @@ w = training(x, w, optimizer)
         - Key question: Do you ohave sufficient data to learn a function of the complexity needed to map x to y?
         - Sometimes, use deep learning to learn individual components rather than the whole process
         - Carefully choose mapping X -> Y depends what tasks you can get data.
+
+## Convolutional Neural Network
+### Foundations
+- Problem of image data: big, high-dimensional input
+- Edge detection example:
+    - Filter/kernel
+    - Take an image, convolve it (*) by a filter
+    - [C4_W1.pdf pg 7]
+    - Filter for light-to-dark or dark-to-light image
+    - Sobel filter: more weigth to the central row
+    - Scharr filter
+    - Sometimes, the filter can be learned using back propagation
+- Padding:
+    - With nxn image and fxf filter, output will be (n-f+1)x(n-f+1) -> shrinked image, data at the corner are not leveraged
+    - Pad the image with additional border
+        - With zero values
+        - p is padding amount. p=1 -> extra border = 1pixel
+        - Edge length of output image will be n+2p-f+1
+    - Valid convolutions: no padding
+    - Same convolutions: pad so that output size is the same as the input size 
+    - f is usually odd so that p can be interger and there can be central pixel in filter
