@@ -454,3 +454,15 @@ w = training(x, w, optimizer)
     - Valid convolutions: no padding
     - Same convolutions: pad so that output size is the same as the input size 
     - f is usually odd so that p can be interger and there can be central pixel in filter
+- Strided convolution:
+    - Number of steps between block (can be different than 1)
+    - Edge of output: floor((n+2p-f)/s + 1)   (rounded down)
+    -> the filter box must lie entirely within image plus the padding region
+    - Cross-correlation vs. convolution: there is another step between convolving - fliping the filter vertically and horizontally. Cross-correlation skip this step. By convention, we can just call it convolution
+        - By flipping: (A*B)*C = A*(B*C)  (signal processing applications)
+        - In neural network, this doesn't matter
+- Convolution over 3D: 
+    - Input and filter 3D, Output: can be 2D
+    - To use multiple filter at the same time: stack outputs together
+    - Output edge: n-f+1 x n-f+1 x nCprime (# of filters)
+    - *channel* can be used interchargably with *depth*
