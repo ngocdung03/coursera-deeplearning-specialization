@@ -466,3 +466,4 @@ w = training(x, w, optimizer)
     - To use multiple filter at the same time: stack outputs together
     - Output edge: n-f+1 x n-f+1 x nCprime (# of filters)
     - *channel* can be used interchargably with *depth*
+- One layer
