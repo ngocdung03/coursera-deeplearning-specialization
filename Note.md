@@ -466,4 +466,6 @@ w = training(x, w, optimizer)
     - To use multiple filter at the same time: stack outputs together
     - Output edge: n-f+1 x n-f+1 x nCprime (# of filters)
     - *channel* can be used interchargably with *depth*
-- One layer
+- One layer of a Convolutional network:
+    - In each layer, # filters = # features 
+    - No matter how big the input image is, the number of parameters is still the sum of (parameters of features) and biases.
