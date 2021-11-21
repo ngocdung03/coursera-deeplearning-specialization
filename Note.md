@@ -470,3 +470,4 @@ w = training(x, w, optimizer)
     - In each layer, # filters = # features 
     - No matter how big the input image is, the number of parameters is still the sum of (parameters of features) and biases.
 
+- Continue week 4
